@@ -1,0 +1,27 @@
+<div
+  class="bg-white shadow-md border rounded-xl p-6 flex flex-col items-center gap-3 relative"
+>
+  <img
+    [src]="product().image"
+    alt="product image"
+    class="w-[200px] max-h-[200px] object-contain"
+    loading="lazy"
+  />
+  <div class="flex justify-between items-center w-full">
+    <h2 class="text-md font-semibold">
+      {{ product().title }}
+    </h2>
+    <span class="text-sm text-gray-500">${{ product().price }}</span>
+  </div>
+  <app-button
+    label="Add to cart"
+    [isDisabled]="!product().stock"
+    (btnClicked)="cartService.addtoCart(product())"
+  />
+  <span
+    class="absolute top-2 right-3 text-sm font-bold"
+    [class]="product().stock ? 'text-blue-500' : 'text-red-500'"
+  >
+    @if (product().stock) {{{ product().stock }} left } @else { Out of stock }
+  </span>
+</div>
